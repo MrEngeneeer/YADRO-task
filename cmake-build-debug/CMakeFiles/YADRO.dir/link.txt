@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/YADRO.dir/main.cpp.o CMakeFiles/YADRO.dir/TapeController/FileTapeController.cpp.o CMakeFiles/YADRO.dir/Sorter/Sorter.cpp.o -o YADRO 
