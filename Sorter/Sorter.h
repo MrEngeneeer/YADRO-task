@@ -18,6 +18,8 @@ public:
 
     Sorter(int M, const std::string &input_file_path, const std::string &config_path);
 
+    ~Sorter() = default;
+
     void sort(std::string outFilePath);
 
 private:

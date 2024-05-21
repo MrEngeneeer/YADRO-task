@@ -14,7 +14,9 @@ public:
 
     FileTapeController(const std::string& file_path, const std::string& config_path);
 
-    FileTapeController(const std::string& file_path);
+    explicit FileTapeController(const std::string& file_path);
+
+    ~FileTapeController() = default;
 
     void go_forward();
 

@@ -10,7 +10,7 @@
 FileTapeController::FileTapeController(std::string const& file_path, std::string const& config_path) {
     _file.open(file_path, std::ios::in);
     if (!_file) {
-        std::cerr << "Не удалось открыть файл" << std::endl;
+        std::cerr << "Cannot open file" << std::endl;
         return;
     }
     _is_empty=false;
@@ -20,6 +20,7 @@ FileTapeController::FileTapeController(std::string const& file_path, std::string
     nlohmann::json config_json;
     std::fstream config_file(config_path);
     config_file >> config_json;
+    config_file.close();
     _read_time = config_json["read time"];
     _write_time = config_json["write time"];
     _shift_time = config_json["shift time"];
@@ -29,7 +30,7 @@ FileTapeController::FileTapeController(std::string const& file_path, std::string
 FileTapeController::FileTapeController(std::string const& file_path) {
     _file.open(file_path, std::ios::in);
     if (!_file) {
-        std::cerr << "Не удалось открыть файл" << std::endl;
+        std::cerr << "Cannot open file" << std::endl;
         return;
     }
     _is_empty=false;
