@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "FileTapeController.h"
+#include "windows.h"
+#include <nlohmann/json.hpp>
 
 FileTapeController::FileTapeController(std::string const& file_path, std::string const& config_path) {
     _file.open(file_path, std::ios::in);
@@ -15,8 +17,13 @@ FileTapeController::FileTapeController(std::string const& file_path, std::string
     _filePath = file_path;
     _newNumbers.clear();
     _file >> _currentNumber;
-
-    std::ifstream config_file("config.json");
+    nlohmann::json config_json;
+    std::fstream config_file(config_path);
+    config_file >> config_json;
+    _read_time = config_json["read time"];
+    _write_time = config_json["write time"];
+    _shift_time = config_json["shift time"];
+    _reset_time = config_json["reset time"];
 }
 
 FileTapeController::FileTapeController(std::string const& file_path) {
@@ -29,15 +36,19 @@ FileTapeController::FileTapeController(std::string const& file_path) {
     _filePath = file_path;
     _newNumbers.clear();
     _file >> _currentNumber;
-
-    std::ifstream config_file("config.json");
+    _read_time = 0;
+    _write_time = 0;
+    _shift_time = 0;
+    _reset_time = 0;
 }
 
 int FileTapeController::get_number() {
+    Sleep(_read_time);
     return _currentNumber;
 }
 
 void FileTapeController::go_forward(){
+    Sleep(_shift_time);
     _newNumbers.push_back(_currentNumber);
     _file >> _currentNumber;
     if(!_file){
@@ -46,11 +57,13 @@ void FileTapeController::go_forward(){
 }
 
 void FileTapeController::set_number(int value) {
+    Sleep(_write_time);
     _currentNumber = value;
     _is_empty = true;
 }
 
 void FileTapeController::reset() {
+    Sleep(_reset_time);
     if(!_is_empty) {
         _newNumbers.push_back(_currentNumber);
     }

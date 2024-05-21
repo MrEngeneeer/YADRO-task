@@ -1,3 +1,0 @@
-/mnt/c/Users/Иван/CLionProjects/YADRO-task/cmake-build-debug/CMakeFiles/YADRO.dir
-/mnt/c/Users/Иван/CLionProjects/YADRO-task/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Иван/CLionProjects/YADRO-task/cmake-build-debug/CMakeFiles/rebuild_cache.dir

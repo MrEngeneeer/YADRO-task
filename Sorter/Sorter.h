@@ -9,11 +9,14 @@
 #include <string>
 #include <cmath>
 #include <fstream>
+#include <algorithm>
 
 template<typename T>
 class Sorter {
 public:
-    Sorter(int M, const std::string& inFilePath);
+    Sorter(int M, const std::string& input_file_path);
+
+    Sorter(int M, const std::string& input_file_path, const std::string& config_path);
 
     void sort(std::string outFilePath);
 
@@ -30,9 +33,9 @@ private:
 };
 
 template<typename T>
-Sorter<T>::Sorter(int M, const std::string& inFilePath) {
+Sorter<T>::Sorter(int M, const std::string& input_file_path) {
     this->M = M;
-    _input_tape = new T(inFilePath);
+    _input_tape = new T(input_file_path);
     std::ofstream file;
     file.open("../temp/tape1.txt", std::ofstream::out | std::ofstream::trunc);
     file.close();
@@ -46,6 +49,25 @@ Sorter<T>::Sorter(int M, const std::string& inFilePath) {
     _second_temp_tape = new T("../temp/tape2.txt");
     _first_trash_tape = new T("../temp/tape3.txt");
     _second_trash_tape = new T("../temp/tape4.txt");
+}
+
+template<typename T>
+Sorter<T>::Sorter(int M, const std::string& input_file_path, const std::string& config_path) {
+    this->M = M;
+    _input_tape = new T(input_file_path);
+    std::ofstream file;
+    file.open("../temp/tape1.txt", std::ofstream::out | std::ofstream::trunc);
+    file.close();
+    file.open("../temp/tape2.txt", std::ofstream::out | std::ofstream::trunc);
+    file.close();
+    file.open("../temp/tape3.txt", std::ofstream::out | std::ofstream::trunc);
+    file.close();
+    file.open("../temp/tape4.txt", std::ofstream::out | std::ofstream::trunc);
+    file.close();
+    _first_temp_tape = new T("../temp/tape1.txt", config_path);
+    _second_temp_tape = new T("../temp/tape2.txt", config_path);
+    _first_trash_tape = new T("../temp/tape3.txt", config_path);
+    _second_trash_tape = new T("../temp/tape4.txt", config_path);
 }
 
 template<typename T>

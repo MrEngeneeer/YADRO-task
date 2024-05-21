@@ -32,6 +32,10 @@ private:
     std::fstream _file;
     int _currentNumber{};
     std::string _filePath;
+    int _read_time;
+    int _write_time;
+    int _shift_time;
+    int _reset_time;
 };
 
 
